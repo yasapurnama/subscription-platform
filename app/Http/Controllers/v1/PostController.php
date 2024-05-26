@@ -5,13 +5,14 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
     public function store(StorePostRequest $request)
     {
-        $post = Post::create($request->validated());
+        Post::create($request->validated());
 
-        return response()->json($post);
+        return response()->json(null, Response::HTTP_CREATED);
     }
 }
