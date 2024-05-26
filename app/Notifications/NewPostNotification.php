@@ -2,6 +2,9 @@
 
 namespace App\Notifications;
 
+use App\Models\EmailSubscription;
+use App\Models\NotifSent;
+use App\Models\Post;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -34,11 +37,19 @@ class NewPostNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable)
     {
-        return Mail::raw('New post: ' . $this->post->title, function ($message) use ($notifiable) {
+        $sentMessage = Mail::raw('New post: ' . $this->post->title, function ($message) use ($notifiable) {
             $message->to($notifiable->routes['email'])
                 ->subject('[New Post] ' . $this->post->title)
                 ->html($this->post->content);
         });
+
+        if ($sentMessage) {
+            $emailSubscription = EmailSubscription::where('email', $notifiable->routes['email'])->first();
+            NotifSent::create([
+                'post_id' => $this->post->id,
+                'email_subscription_id' => $emailSubscription->id,
+            ]);
+        }
     }
 
     /**

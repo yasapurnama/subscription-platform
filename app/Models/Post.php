@@ -33,4 +33,9 @@ class Post extends Model
     {
         return $this->belongsTo(Website::class);
     }
+
+    public function notifSents()
+    {
+        return $this->hasMany(NotifSent::class);
+    }
 }
