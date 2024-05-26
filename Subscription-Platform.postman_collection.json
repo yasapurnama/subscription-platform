@@ -33,6 +33,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Store Subscriber",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"website_id\" : 2,\n    \"email\" : \"new_subscriber@mail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/subscribers",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"subscribers"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

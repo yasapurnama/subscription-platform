@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\v1\PostController;
+use App\Http\Controllers\v1\SubscriberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::post('posts', [PostController::class, 'store']);
+    Route::post('subscribers', [SubscriberController::class, 'store']);
 });
